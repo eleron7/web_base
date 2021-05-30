@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <title>MY PROFILE.</title>
+    <meta charset="utf-8">
+</head>
+<style>
+    @font-face {
+        font-family: abster;
+        src: url(font/abster-webfont.woff) format('woff');
+    }
+
+    .header {
+        /* background-color: yellow; */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(images/background.jpeg);
+        height: 350px;
+    }
+
+    .title {
+        /* background-color: red; */
+        margin-top: 80px;
+        color: white;
+        font-size: 30px;
+        display: inline-flex;
+        padding-left: 100px;
+        font-family: abster;
+    }
+
+    .menu {
+        /* background-color: blue; */
+        padding-top: 140px;
+        width: 1000px;
+        display: inline-flex;
+        font-family: abster;
+    }
+
+    #sns {
+        /* background-color: purple; */
+        margin-top: 100px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .email {
+        margin-top: 17px;
+        margin-left: 20px;
+    }
+
+    .facebook {
+        margin-left: 20px;
+        margin-top: -3px;
+    }
+
+    .header ul {
+        /* background-color: green; */
+        width: 1000px;
+    }
+
+    .header ul li {
+        color: white;
+        font-size: 25px;
+        display: inline-flex;
+        margin-left: 190px;
+    }
+
+    .contents {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px auto;
+        align-items: center;
+        font-size: 50px;
+    }
+
+    #items {
+        width: 520px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .title a:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    .title a:hover {
+        color: magenta;
+    }
+
+    .menu a:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        color: magenta;
+    }
+
+    a:visited {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: magenta;
+    }
+
+    .lg-text{
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    #dynamic {
+        position: relative;
+        display: inline-block;
+    }
+
+    #dynamic::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 10px;
+        height: 90%;
+        background-color: black;
+    }
+
+    #dynamic.active::after {
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <div class="title">
+                <h1><a href="MYFROFILE.html">MY PROFILE.</a>
+                </h1>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><b><a href="who.html">.Who is Lee?</a></b></li>
+                    <li><b><a href="Skills.html">.Skills</a></b></li>
+                    <li><b><a href="Education.html">.Education</a></b></li>
+                    <div id="sns">
+                        <div class="email" style="color:white"><b>eleron5603@gmail.com</b></div>
+                        <div class="facebook"><a href="https://www.facebook.com/profile.php?id=100004056140660"
+                                target="_blank"><img src="images/facebook.png" alt="페이스북" width="55px"></a></div>
+                        <div class="instagram"><a href="https://www.instagram.com/no_reel/" target="_blank"><img
+                                    src="images/instagram.png" alt="인스타그램" width="40px"></a></div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="contents">
+            <p id="dynamic" class="lg-text" style="font-size: 150px;"></p>
+        </div>
+        <script>
+            let target = document.querySelector("#dynamic");
+
+            function randomString() {
+                let stringArr = ["Welcome to MYPAGE!"];
+                let selectString = stringArr[Math.floor(Math.random() * stringArr.length)];
+                let selectStringArr = selectString.split("");
+
+                return selectStringArr;
+            }
+
+            function resetTyping() {
+                target.textContent = "";
+                dynamic(randomString());
+            }
+
+            //한글자씩 텍스트 출력 함수
+            function dynamic(randomArr) {
+                if (randomArr.length > 0) {
+                    target.textContent += randomArr.shift();
+                    setTimeout(function () {
+                        dynamic(randomArr);
+                    }, 80);
+                }
+                else {
+                    setTimeout(resetTyping, 3000);
+                }
+            }
+
+            dynamic(randomString());
+
+            function blink() {
+                target.classList.toggle("active");
+            }
+            setInterval(blink, 500);
+        </script>
+    </div>
+</body>
+
+</html>
